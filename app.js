@@ -18,9 +18,10 @@ const authEmailEl   = document.getElementById('auth-email');
 const authPassEl    = document.getElementById('auth-password');
 const authSubmitBtn = document.getElementById('auth-submit');
 const authMessageEl = document.getElementById('auth-message');
-const userInfo      = document.getElementById('user-info');
-const userEmailEl   = document.getElementById('user-email');
-const logoutBtn     = document.getElementById('logout-btn');
+const userInfo        = document.getElementById('user-info');
+const userEmailEl     = document.getElementById('user-email');
+const userProviderEl  = document.getElementById('user-provider');
+const logoutBtn       = document.getElementById('logout-btn');
 // ──────────────────────────────────────────────────────────────────────────────
 
 const PRIORITY_ORDER = { high: 0, medium: 1, low: 2 };
@@ -104,9 +105,14 @@ document.getElementById('login-github').addEventListener('click', () => {
 
 logoutBtn.addEventListener('click', () => db.auth.signOut());
 
+const PROVIDER_LABEL = { email: '이메일', google: 'Google', github: 'GitHub' };
+
 function showApp(user) {
   currentUserId = user.id;
   userEmailEl.textContent = user.email ?? user.user_metadata?.full_name ?? '';
+  const provider = user.app_metadata?.provider ?? 'email';
+  userProviderEl.textContent = PROVIDER_LABEL[provider] ?? provider;
+  userProviderEl.dataset.provider = provider;
   userInfo.style.display = 'flex';
   authOverlay.style.display = 'none';
   init();
