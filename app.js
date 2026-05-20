@@ -90,16 +90,22 @@ authSubmitBtn.addEventListener('click', async () => {
   authSubmitBtn.disabled = false;
 
   if (error) { setAuthMessage(error.message); return; }
-  if (authMode === 'signup') setAuthMessage('확인 이메일을 발송했습니다. 메일함을 확인하세요.', false);
+  if (authMode === 'signup') {
+    setAuthMessage('확인 이메일을 발송했습니다. 메일함을 확인하세요.', false);
+  } else {
+    sessionStorage.setItem('loginProvider', 'email');
+  }
 });
 
 authPassEl.addEventListener('keydown', e => { if (e.key === 'Enter') authSubmitBtn.click(); });
 
 document.getElementById('login-google').addEventListener('click', () => {
+  sessionStorage.setItem('loginProvider', 'google');
   db.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin + window.location.pathname } });
 });
 
 document.getElementById('login-github').addEventListener('click', () => {
+  sessionStorage.setItem('loginProvider', 'github');
   db.auth.signInWithOAuth({ provider: 'github', options: { redirectTo: window.location.origin + window.location.pathname } });
 });
 
@@ -110,7 +116,7 @@ const PROVIDER_LABEL = { email: '이메일', google: 'Google', github: 'GitHub' 
 function showApp(user) {
   currentUserId = user.id;
   userEmailEl.textContent = user.email ?? user.user_metadata?.full_name ?? '';
-  const provider = user.app_metadata?.provider ?? 'email';
+  const provider = sessionStorage.getItem('loginProvider') ?? user.app_metadata?.provider ?? 'email';
   userProviderEl.textContent = PROVIDER_LABEL[provider] ?? provider;
   userProviderEl.dataset.provider = provider;
   userInfo.style.display = 'flex';
