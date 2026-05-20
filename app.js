@@ -99,6 +99,13 @@ authSubmitBtn.addEventListener('click', async () => {
 
 authPassEl.addEventListener('keydown', e => { if (e.key === 'Enter') authSubmitBtn.click(); });
 
+const togglePasswordBtn = document.getElementById('toggle-password');
+togglePasswordBtn.addEventListener('click', () => {
+  const isPassword = authPassEl.type === 'password';
+  authPassEl.type = isPassword ? 'text' : 'password';
+  togglePasswordBtn.textContent = isPassword ? '숨기기' : '표시';
+});
+
 document.getElementById('login-google').addEventListener('click', () => {
   sessionStorage.setItem('loginProvider', 'google');
   db.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin + window.location.pathname } });

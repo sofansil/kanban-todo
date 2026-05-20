@@ -155,10 +155,31 @@ body {
   color: var(--text);
   outline: none;
   transition: border-color 0.15s;
+  width: 100%;
 }
 
 #auth-email::placeholder,
 #auth-password::placeholder { color: var(--text-muted); }
+
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: color 0.15s;
+}
+
+.toggle-password:hover { color: var(--text); }
 
 #auth-email:focus,
 #auth-password:focus { border-color: var(--accent); }
