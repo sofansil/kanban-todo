@@ -127,6 +127,7 @@ function showApp(user) {
 function showAuth() {
   currentUserId = null;
   todos = [];
+  sessionStorage.removeItem('loginProvider');
   userInfo.style.display = 'none';
   authOverlay.style.display = 'flex';
   Object.values(COLS).forEach(col => col.innerHTML = '');
