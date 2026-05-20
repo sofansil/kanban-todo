@@ -95,11 +95,11 @@ authSubmitBtn.addEventListener('click', async () => {
 authPassEl.addEventListener('keydown', e => { if (e.key === 'Enter') authSubmitBtn.click(); });
 
 document.getElementById('login-google').addEventListener('click', () => {
-  db.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.href } });
+  db.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin + window.location.pathname } });
 });
 
 document.getElementById('login-github').addEventListener('click', () => {
-  db.auth.signInWithOAuth({ provider: 'github', options: { redirectTo: window.location.href } });
+  db.auth.signInWithOAuth({ provider: 'github', options: { redirectTo: window.location.origin + window.location.pathname } });
 });
 
 logoutBtn.addEventListener('click', () => db.auth.signOut());
