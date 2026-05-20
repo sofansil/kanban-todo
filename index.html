@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div id="toast-container"></div>
+
+  <!-- 인증 오버레이 -->
+  <div id="auth-overlay">
+    <div class="auth-box">
+      <h2>Todo List</h2>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="signin">로그인</button>
+        <button class="auth-tab" data-tab="signup">회원가입</button>
+      </div>
+      <div class="auth-form">
+        <input type="email" id="auth-email" placeholder="이메일" autocomplete="email" />
+        <input type="password" id="auth-password" placeholder="비밀번호" autocomplete="current-password" />
+        <button id="auth-submit">로그인</button>
+        <p id="auth-message" class="auth-message"></p>
+      </div>
+      <div class="auth-divider"><span>또는</span></div>
+      <div class="auth-social">
+        <button id="login-google" class="social-btn">Google로 계속</button>
+        <button id="login-github" class="social-btn">GitHub로 계속</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="title-row">
+      <h1>Todo List</h1>
+      <div id="user-info" class="user-info">
+        <span id="user-email"></span>
+        <button id="logout-btn">로그아웃</button>
+      </div>
+    </div>
+    <div class="input-row">
+      <input type="text" id="todo-input" placeholder="할 일을 입력하세요..." />
+      <select id="priority-select">
+        <option value="high">높음</option>
+        <option value="medium" selected>중간</option>
+        <option value="low">낮음</option>
+      </select>
+      <button id="add-btn">추가</button>
+    </div>
+    <div class="board" id="board">
+      <div class="board-col">
+        <div class="board-col-header">
+          <span class="board-col-title">할 일</span>
+          <span class="board-col-count" id="count-todo">0</span>
+        </div>
+        <ul class="card-list" id="col-todo"></ul>
+      </div>
+      <div class="board-col">
+        <div class="board-col-header">
+          <span class="board-col-title">진행 중</span>
+          <span class="board-col-count" id="count-in-progress">0</span>
+        </div>
+        <ul class="card-list" id="col-in-progress"></ul>
+      </div>
+      <div class="board-col">
+        <div class="board-col-header">
+          <span class="board-col-title">완료</span>
+          <span class="board-col-count" id="count-done">0</span>
+        </div>
+        <ul class="card-list" id="col-done"></ul>
+      </div>
+    </div>
+  </div>
+  <script defer src="app.js"></script>
+</body>
+</html>
