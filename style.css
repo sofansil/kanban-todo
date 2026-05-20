@@ -173,9 +173,10 @@ body {
   background: transparent;
   border: none;
   color: var(--text-muted);
-  font-size: 0.78rem;
   cursor: pointer;
   padding: 2px 4px;
+  display: flex;
+  align-items: center;
   transition: color 0.15s;
 }
 
