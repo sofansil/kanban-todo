@@ -159,6 +159,7 @@ async function loadTodos() {
   const { data, error } = await db
     .from('todos')
     .select('*')
+    .eq('user_id', currentUserId)
     .order('created_at', { ascending: true });
 
   if (error) {
